@@ -19,7 +19,7 @@ namespace VolvoAcademyTask2
         public string RegistrationNumber { get; set; }
         public ComfortClass ComfortClass { get; set; }
         public abstract bool ExceedsTenure { get; }
-        public abstract int CalculateCurrentValue();
-        public abstract int RequiresMaintenanceIn();
+        public abstract decimal CalculateCurrentValue();
+        public abstract decimal RequiresMaintenanceIn();
     }
 }

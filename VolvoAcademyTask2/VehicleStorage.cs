@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using VolvoAcademyTask2.Enums;
 using VolvoAcademyTask2.Interfaces;
 
 namespace VolvoAcademyTask2
@@ -11,54 +13,58 @@ namespace VolvoAcademyTask2
     internal class VehicleStorage : IVehicleStorage
     {
         public List<Vehicle> vehicles = new List<Vehicle>();
-        public void AddVehicle()
+        public void AddVehicle(Vehicle newVehicle)
         {
-            throw new NotImplementedException();
+            vehicles.Add(newVehicle);
         }
-
-        public void CalculateTotalValue()
-        {
-            throw new NotImplementedException();
-        }
-
         public Vehicle GetVehicle(int vehicleId)
         {
-            throw new NotImplementedException();
+            return vehicles.FirstOrDefault(v => v.Id == vehicleId);
         }
-
         public List<Vehicle> GetVehicles()
         {
-            throw new NotImplementedException();
+            return vehicles;
         }
-
+        public void UpdateVehicle(int vehicleToUpdateId, VehicleBrand Brand, VehicleModel Model,
+            int ManufactureYear, Color Color, decimal Price,
+            string RegistrationNumber, ComfortClass ComfortClass)
+        {
+            var vehicleToUpdate = GetVehicle(vehicleToUpdateId);
+            vehicleToUpdate.Brand = Brand;
+            vehicleToUpdate.Model = Model;
+            vehicleToUpdate.ManufactureYear = ManufactureYear;
+            vehicleToUpdate.Color = Color;
+            vehicleToUpdate.Price = Price;
+            vehicleToUpdate.RegistrationNumber = RegistrationNumber;
+            vehicleToUpdate.ComfortClass = ComfortClass;
+        }
         public void RemoveVehicle(int vehicleId)
         {
-            throw new NotImplementedException();
+            vehicles.Remove(GetVehicle(vehicleId));
         }
-
+        public void ShowVehicles(VehicleBrand brand)
+        {
+            var specificBrandVehicles = vehicles.Where(v => v.Brand == brand).ToList();
+            specificBrandVehicles.ForEach(Console.WriteLine);
+        }
         public void ShowExceededTenureVehicles(VehicleModel model)
         {
-            throw new NotImplementedException();
+            var exceededTenureVehicles = vehicles.Where(v => v.ExceedsTenure == true && v.Model == model).ToList();
+            exceededTenureVehicles.ForEach(Console.WriteLine);
         }
-
-        public void ShowMatchingVehicles(string brand, string color)
+        public decimal CalculateTotalValue()
         {
-            throw new NotImplementedException();
+            return vehicles.Sum(v => v.CalculateCurrentValue());
         }
-
-        public void ShowVehicles(string brand)
+        public void ShowMatchingVehicles(VehicleBrand brand, Color color)
         {
-            throw new NotImplementedException();
+            var matchingVehicles = vehicles.Where(v => v.Brand == brand && v.Color == color).GroupBy(v => v.ComfortClass).ToList();
+            matchingVehicles.ForEach(Console.WriteLine);
         }
-
         public void ShowVehiclesRequiringMaintenance()
         {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateVehicle(int vehicleId)
-        {
-            throw new NotImplementedException();
+            var requiringMaintenanceVehicles = vehicles.Where(v => v.RequiresMaintenanceIn() <= 1000).ToList();
+            requiringMaintenanceVehicles.ForEach(Console.WriteLine);
         }
     }
 }

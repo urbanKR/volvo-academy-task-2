@@ -14,14 +14,14 @@ namespace VolvoAcademyTask2
 
         public override bool ExceedsTenure => TravelDistance > 100000 || DateTime.Now.Year - ManufactureYear > 5;
 
-        public override int CalculateCurrentValue()
+        public override decimal CalculateCurrentValue()
         {
-            throw new NotImplementedException();
+            return  Price * (decimal) Math.Pow(0.9, DateTime.Now.Year - ManufactureYear);
         }
 
-        public override int RequiresMaintenanceIn()
+        public override decimal RequiresMaintenanceIn()
         {
-            throw new NotImplementedException();
+            return 5000 - TravelDistance % 5000; 
         }
     }
 }

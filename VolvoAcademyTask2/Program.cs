@@ -8,8 +8,6 @@ namespace VolvoAcademyTask2
         {
             Console.WriteLine("Hello, World!");
             Console.WriteLine("Hello, World!");
-
-            // IVehicleRepository vehicleStorage = new VehicleRepository(args.Length > 0 ? args[0] : null);
         }
     }
 }
