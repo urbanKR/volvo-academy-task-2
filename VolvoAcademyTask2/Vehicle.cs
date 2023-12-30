@@ -21,5 +21,17 @@ namespace VolvoAcademyTask2
         public abstract bool ExceedsTenure { get; }
         public abstract decimal CalculateCurrentValue();
         public abstract decimal RequiresMaintenanceIn();
+        public abstract void ShowVehicle();
+        public Vehicle(int id, VehicleBrand brand, VehicleModel model, int manufactureYear, Color color, decimal price, string registrationNumber, ComfortClass comfortClass)
+        {
+            Id = id;
+            Brand = brand;
+            Model = model;
+            ManufactureYear = manufactureYear;
+            Color = color;
+            Price = price;
+            RegistrationNumber = registrationNumber;
+            ComfortClass = comfortClass;
+        }
     }
 }

@@ -29,10 +29,12 @@ namespace VolvoAcademyTask2.Interfaces
             string RegistrationNumber, ComfortClass ComfortClass);
         // Remove vehicle by id.
         void RemoveVehicle(int vehicleId);
+        // List all vehicles
+        void ShowVehicles();
         // List inventory of vehicles of specified brand.
         void ShowVehicles(VehicleBrand brand);
         // List of vehicles of a chosen model that have exceeded a predetermined operational tenure.
-        void ShowExceededTenureVehicles(VehicleModel model);
+        void ShowExceededTenureVehicles(string modelName);
         // Calculate total value of the entire vehicle fleet owned. 
         decimal CalculateTotalValue();
         // Given a preference for vehicle brand and color – show a selection of matching vehicles sorted by comfort class.

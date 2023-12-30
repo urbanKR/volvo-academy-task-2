@@ -12,7 +12,11 @@ namespace VolvoAcademyTask2
 {
     internal class VehicleStorage : IVehicleStorage
     {
-        public List<Vehicle> vehicles = new List<Vehicle>();
+        public List<Vehicle> vehicles;
+        public VehicleStorage()
+        {
+            vehicles = new List<Vehicle>();
+        }
         public void AddVehicle(Vehicle newVehicle)
         {
             vehicles.Add(newVehicle);
@@ -42,15 +46,19 @@ namespace VolvoAcademyTask2
         {
             vehicles.Remove(GetVehicle(vehicleId));
         }
+        public void ShowVehicles()
+        {
+            vehicles.ForEach(v => v.ShowVehicle());
+        }
         public void ShowVehicles(VehicleBrand brand)
         {
             var specificBrandVehicles = vehicles.Where(v => v.Brand == brand).ToList();
-            specificBrandVehicles.ForEach(Console.WriteLine);
+            specificBrandVehicles.ForEach(v => v.ShowVehicle());
         }
-        public void ShowExceededTenureVehicles(VehicleModel model)
+        public void ShowExceededTenureVehicles(string modelName)
         {
-            var exceededTenureVehicles = vehicles.Where(v => v.ExceedsTenure == true && v.Model == model).ToList();
-            exceededTenureVehicles.ForEach(Console.WriteLine);
+            var exceededTenureVehicles = vehicles.Where(v => v.ExceedsTenure == true && v.Model.Name == modelName).ToList();
+            exceededTenureVehicles.ForEach(v => v.ShowVehicle());
         }
         public decimal CalculateTotalValue()
         {
@@ -58,13 +66,23 @@ namespace VolvoAcademyTask2
         }
         public void ShowMatchingVehicles(VehicleBrand brand, Color color)
         {
-            var matchingVehicles = vehicles.Where(v => v.Brand == brand && v.Color == color).GroupBy(v => v.ComfortClass).ToList();
-            matchingVehicles.ForEach(Console.WriteLine);
+            var matchingVehicles = vehicles.Where(v => v.Brand == brand && v.Color == color).OrderByDescending(v => v.ComfortClass).ToList();
+            ComfortClass prevVComfortClass = matchingVehicles.ElementAt(0).ComfortClass;
+            Console.WriteLine($"**********Comfort class: {prevVComfortClass}***********\n");
+            foreach (var v in matchingVehicles) 
+            {
+                if(prevVComfortClass != v.ComfortClass)
+                {
+                    Console.WriteLine($"**********Comfort class: {v.ComfortClass}***********\n");
+                }
+                v.ShowVehicle();
+                prevVComfortClass = v.ComfortClass;
+            }
         }
         public void ShowVehiclesRequiringMaintenance()
         {
             var requiringMaintenanceVehicles = vehicles.Where(v => v.RequiresMaintenanceIn() <= 1000).ToList();
-            requiringMaintenanceVehicles.ForEach(Console.WriteLine);
+            requiringMaintenanceVehicles.ForEach(v => v.ShowVehicle());
         }
     }
 }
