@@ -1,4 +1,5 @@
 ﻿using VolvoAcademyTask2.Interfaces;
+using VolvoAcademyTask2.Repository;
 
 namespace VolvoAcademyTask2
 {
@@ -6,7 +7,7 @@ namespace VolvoAcademyTask2
     {
         static void Main(string[] args)
         {
-            VehicleStorage vehicleStorage = new VehicleStorage();
+            VehicleStorage vehicleStorage = new VehicleStorage(new VehicleRepository());
 
             vehicleStorage.AddVehicle(new PassengerVehicle(1, Enums.VehicleBrand.Opel, new VehicleModel(1, "Astra", 1),
                 2002, System.Drawing.Color.LightPink, 237000, "DWC8720", Enums.ComfortClass.Luxury, new TimeSpan(30, 5, 0, 0), 244000, 800));
@@ -28,7 +29,7 @@ namespace VolvoAcademyTask2
             //vehicleStorage.ShowVehicles();
             //vehicleStorage.ShowVehicles(Enums.VehicleBrand.Opel);
             //vehicleStorage.ShowExceededTenureVehicles("mokka");
-            //Console.WriteLine(vehicleStorage.CalculateTotalValue());
+            //Console.WriteLine(vehicleStorage.GetTotalValue());
             //vehicleStorage.ShowMatchingVehicles(Enums.VehicleBrand.Opel, System.Drawing.Color.LightBlue);
             //vehicleStorage.ShowVehiclesRequiringMaintenance();
         }

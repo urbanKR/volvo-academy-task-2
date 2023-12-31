@@ -24,9 +24,9 @@ namespace VolvoAcademyTask2.Interfaces
         // Get all Vehicles.
         List<Vehicle> GetVehicles();
         // Update vehicle by id.
-        abstract void UpdateVehicle(int vehicleToUpdateId, VehicleBrand Brand, VehicleModel Model, 
-            int ManufactureYear, Color Color, decimal Price,
-            string RegistrationNumber, ComfortClass ComfortClass);
+        abstract void UpdateVehicle(int vehicleToUpdateId, VehicleBrand brand, VehicleModel model, 
+            int manufactureYear, Color color, decimal price,
+            string registrationNumber, ComfortClass comfortClass);
         // Remove vehicle by id.
         void RemoveVehicle(int vehicleId);
         // List all vehicles
@@ -36,7 +36,7 @@ namespace VolvoAcademyTask2.Interfaces
         // List of vehicles of a chosen model that have exceeded a predetermined operational tenure.
         void ShowExceededTenureVehicles(string modelName);
         // Calculate total value of the entire vehicle fleet owned. 
-        decimal CalculateTotalValue();
+        decimal GetTotalValue();
         // Given a preference for vehicle brand and color – show a selection of matching vehicles sorted by comfort class.
         void ShowMatchingVehicles(VehicleBrand brand, Color color);
         // Show a list of vehicles that are within 1000 km of requiring maintenance.
