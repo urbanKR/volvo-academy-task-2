@@ -30,11 +30,11 @@ namespace VolvoAcademyTask2
             return repository.GetVehicles();
         }
         public void UpdateVehicle(int vehicleToUpdateId, VehicleBrand brand, VehicleModel model,
-            int manufactureYear, Color color, decimal price,
+            int manufactureYear, string colorName, decimal price,
             string registrationNumber, ComfortClass comfortClass)
         {
             repository.UpdateVehicle(vehicleToUpdateId, brand, model,
-            manufactureYear, color, price,
+            manufactureYear, colorName, price,
             registrationNumber, comfortClass);
         }
         public void RemoveVehicle(int vehicleId)
@@ -51,27 +51,30 @@ namespace VolvoAcademyTask2
         }
         public void ShowVehicles(VehicleBrand brand)
         {
-            var specificBrandVehicles = repository.GetVehicles().Where(v => v.Brand == brand).ToList();
+            var specificBrandVehicles = repository.GetVehicles().Where(v => v.VehicleBrand == brand).ToList();
             specificBrandVehicles.ForEach(v => v.ShowVehicle());
         }
         public void ShowExceededTenureVehicles(string modelName)
         {
-            var exceededTenureVehicles = repository.GetVehicles().Where(v => v.ExceedsTenure == true && v.Model.Name == modelName).ToList();
+            var exceededTenureVehicles = repository.GetVehicles().Where(v => v.ExceedsTenure == true && v.VehicleModel.Name == modelName).ToList();
             exceededTenureVehicles.ForEach(v => v.ShowVehicle());
         }
         public void ShowMatchingVehicles(VehicleBrand brand, Color color)
         {
-            var matchingVehicles = repository.GetVehicles().Where(v => v.Brand == brand && v.Color == color).OrderByDescending(v => v.ComfortClass).ToList();
-            ComfortClass prevVComfortClass = matchingVehicles.ElementAt(0).ComfortClass;
-            Console.WriteLine($"**********Comfort class: {prevVComfortClass}***********\n");
-            foreach (var v in matchingVehicles) 
+            var matchingVehicles = repository.GetVehicles().Where(v => v.VehicleBrand == brand && v.Color == color).OrderByDescending(v => v.ComfortClass).ToList();
+            if (matchingVehicles.Any())
             {
-                if(prevVComfortClass != v.ComfortClass)
+                ComfortClass prevVComfortClass = matchingVehicles.ElementAt(0).ComfortClass;
+                Console.WriteLine($"**********Comfort class: {prevVComfortClass}***********\n");
+                foreach (var v in matchingVehicles)
                 {
-                    Console.WriteLine($"**********Comfort class: {v.ComfortClass}***********\n");
+                    if (prevVComfortClass != v.ComfortClass)
+                    {
+                        Console.WriteLine($"**********Comfort class: {v.ComfortClass}***********\n");
+                    }
+                    v.ShowVehicle();
+                    prevVComfortClass = v.ComfortClass;
                 }
-                v.ShowVehicle();
-                prevVComfortClass = v.ComfortClass;
             }
         }
         public void ShowVehiclesRequiringMaintenance()

@@ -25,7 +25,7 @@ namespace VolvoAcademyTask2.Interfaces
         List<Vehicle> GetVehicles();
         // Update vehicle by id.
         abstract void UpdateVehicle(int vehicleToUpdateId, VehicleBrand brand, VehicleModel model, 
-            int manufactureYear, Color color, decimal price,
+            int manufactureYear, string colorName, decimal price,
             string registrationNumber, ComfortClass comfortClass);
         // Remove vehicle by id.
         void RemoveVehicle(int vehicleId);

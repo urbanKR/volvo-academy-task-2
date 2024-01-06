@@ -2,19 +2,47 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using VolvoAcademyTask2.Enums;
 using VolvoAcademyTask2.Interfaces;
 
-namespace VolvoAcademyTask2.Repository
+namespace VolvoAcademyTask2.Repositories
 {
-    internal class VehicleRepository : IVehicleRepository
+    internal class VehicleRepositoryFromFile : IVehicleRepository
     {
         public List<Vehicle> vehicles;
-        public VehicleRepository()
+        private string fileName;
+        private string filePath;
+        public VehicleRepositoryFromFile(string fileName)
         {
-            vehicles = new List<Vehicle>();
+            this.fileName = fileName;
+            string executableLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            this.filePath = Path.Combine(executableLocation, "Data", fileName);
+            vehicles = ReadDataFromFile();
+        }
+        public List<Vehicle> ReadDataFromFile()
+        {
+            var serializeOptions = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            };
+            List<Vehicle> vehicles = [];
+            if (File.Exists(this.filePath))
+            {
+                var fileDataJSON = new string(File.ReadAllText(this.filePath));
+                var vehicleData = JsonSerializer.Deserialize<VehicleData>(fileDataJSON, serializeOptions);
+                vehicles.AddRange(vehicleData.PassengerVehicles);
+                vehicles.AddRange(vehicleData.CargoVehicles);
+            }
+            else
+            {
+                Console.WriteLine("Wrong File Path!");
+            }
+            return vehicles;
         }
         public void AddVehicle(Vehicle newVehicle)
         {

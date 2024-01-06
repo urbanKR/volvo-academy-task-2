@@ -6,7 +6,10 @@
         public string Name { get; set; }
         public decimal PriceCoefficient { get; set; }
 
-        public VehicleModel(int id, string name, decimal priceCoefficient) 
+        public VehicleModel()
+        {           
+        }
+        public VehicleModel(int id, string name, decimal priceCoefficient) : this()
         {
             Id = id;
             Name = name;

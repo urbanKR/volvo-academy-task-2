@@ -8,17 +8,21 @@ using VolvoAcademyTask2.Enums;
 
 namespace VolvoAcademyTask2
 {
-    internal class CargoVehicle : Vehicle
+    public class CargoVehicle : Vehicle
     {
         public TimeSpan TripDuration { get; set; }
         public decimal TravelDistance { get; set; }
         public decimal Weight { get; set; }
 
         public override bool ExceedsTenure => TravelDistance > 1000000 || DateTime.Now.Year - ManufactureYear > 15;
+        public CargoVehicle()
+        {
+            
+        }
         public CargoVehicle(int id, VehicleBrand brand, VehicleModel model, int manufactureYear,
-            Color color, decimal price, string registrationNumber, ComfortClass comfortClass,
+            string colorName, decimal price, string registrationNumber, ComfortClass comfortClass,
             TimeSpan tripDuration, decimal travelDistance, decimal weight)
-            : base(id, brand, model, manufactureYear, color, price, registrationNumber, comfortClass)
+            : base(id, brand, model, manufactureYear, colorName, price, registrationNumber, comfortClass)
         {
             TripDuration = tripDuration;
             TravelDistance = travelDistance;
@@ -33,14 +37,11 @@ namespace VolvoAcademyTask2
         {
             return 15000 - TravelDistance % 15000;
         }
-
         public override void ShowVehicle()
         {
-            Console.WriteLine($"type: {this.GetType().Name}, id: {this.Id}, brand: {this.Brand}, model: {this.Model.Name}, manufactureYear: {this.ManufactureYear}, " +
-                  $"color: {this.Color}, price: {this.Price:C},\nregistrationNumber: {this.RegistrationNumber}, " +
-                  $"comfortClass: {this.ComfortClass}, tripDuration: {this.TripDuration}, " +
-                  $"travelDistance: {this.TravelDistance} km, Weight: {this.Weight}\n");
-
+            Console.WriteLine($"type: {this.GetType().Name}, id: {this.Id}, brand: {this.VehicleBrand}, model: {this.VehicleModel.Name},\n" +
+                  $"manufactureYear: {this.ManufactureYear}, color: {this.Color}, price: {this.Price:C}, registrationNumber: {this.RegistrationNumber},\n" +
+                  $"comfortClass: {this.ComfortClass}, tripDuration: {this.TripDuration},travelDistance: {this.TravelDistance} km, weight: {this.Weight}\n");
         }
     }
 }

@@ -1,0 +1,76 @@
+{
+  "passengerVehicles": [
+    {
+      "id": 1,
+      "vehicleBrand": "Toyota",
+      "vehicleModel": {
+        "id": 0,
+        "name": "Yaris",
+        "priceCoefficient": 1.0
+      },
+      "manufactureYear": 2002,
+      "colorName": "LightPink",
+      "price": 23700000.21,
+      "registrationNumber": "DWC8720",
+      "comfortClass": "Standard",
+      "tripDuration": "00:01:00",
+      "travelDistance": 244000,
+      "leeseRating": 800
+    },
+    {
+      "id": 2,
+      "vehicleBrand": "Opel",
+      "vehicleModel": {
+        "id": 1,
+        "name": "Astra",
+        "priceCoefficient": 1.0
+      },
+      "manufactureYear": 2002,
+      "colorName": "LightPink",
+      "price": 23700000.21,
+      "registrationNumber": "DWC8720",
+      "comfortClass": "Standard",
+      "tripDuration": "00:02:00",
+      "travelDistance": 244000,
+      "leeseRating": 800
+    }
+  ],
+  "cargoVehicles": [
+    {
+      "vehicleBrand": "Opel",
+      "vehicleModel": {
+        "id": 2,
+        "name": "Astra",
+        "priceCoefficient": 1.0
+      },
+      "id": 3,
+      "manufactureYear": 2003,
+      "colorName": "LightPink",
+      "price": 23000.10,
+      "registrationNumber": "DWF8E2C",
+      "comfortClass": "Luxury",
+      "tripDuration": "03:02:30",
+      "travelDistance": 244000,
+      "leeseRating": 800,
+      "weight": 1000
+    },
+    {
+      "id": 4,
+      "manufactureYear": 2003,
+      "vehicleBrand": "Toyota",
+      "vehicleModel": {
+        "id": 3,
+        "name": "Supra",
+        "priceCoefficient": 1.0
+      },
+      "colorName": "LightPink",
+      "price": 23000.10,
+      "registrationNumber": "DWF8E2C",
+      "comfortClass": "Economy",
+      "tripDuration": "00:22:30",
+      "travelDistance": 244000,
+      "leeseRating": 800,
+      "weight": 1000
+    }
+  ]
+}
