@@ -82,5 +82,22 @@ namespace VolvoAcademyTask2
             var requiringMaintenanceVehicles = repository.GetVehicles().Where(v => v.RequiresMaintenanceIn() <= 1000).ToList();
             requiringMaintenanceVehicles.ForEach(v => v.ShowVehicle());
         }
+
+        public void DisplayMethods()
+        {
+            Console.WriteLine("Diplaying methods:\n");
+            Console.WriteLine("**********ShowVehicles()**********\n");
+            ShowVehicles();
+            Console.WriteLine("a) ShowVehicles(VehicleBrand.Opel)\n");
+            ShowVehicles(VehicleBrand.Opel);
+            Console.WriteLine("b) ShowExceededTenureVehicles(\"Astra\")\n");
+            ShowExceededTenureVehicles("Astra");
+            Console.WriteLine("c) GetTotalValue()\n");
+            Console.WriteLine(GetTotalValue() + "\n");
+            Console.WriteLine("d) ShowMatchingVehicles(VehicleBrand.Opel, Color.LightPink)\n");
+            ShowMatchingVehicles(VehicleBrand.Opel, Color.LightPink);
+            Console.WriteLine("e) ShowVehiclesRequiringMaintenance()\n");
+            ShowVehiclesRequiringMaintenance();
+        }
     }
 }
